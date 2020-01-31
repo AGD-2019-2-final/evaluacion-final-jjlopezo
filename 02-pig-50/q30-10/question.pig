@@ -30,20 +30,16 @@
 -- 
 fs -rm -f -r output;
 --
-u = LOAD 'data.csv' USING PigStorage(',') 
+data = LOAD 'data.csv' USING PigStorage(',') 
     AS (id:int, 
         firstname:CHARARRAY, 
         surname:CHARARRAY, 
         birthday:CHARARRAY, 
         color:CHARARRAY, 
         quantity:INT);
---
--- >>> Escriba su respuesta a partir de este punto <<<
---
---1971-07-08,08,8,jue,jueves
 
 
-fecha = FOREACH u GENERATE birthday as fecha, ToDate(birthday,'yyyy-MM-dd') AS fecha_f;
+fecha = FOREACH data GENERATE birthday as fecha, ToDate(birthday,'yyyy-MM-dd') AS fecha_f;
 
 fecha_formato = FOREACH fecha GENERATE fecha
 				, SUBSTRING($0,8,10) AS num_dia_largo

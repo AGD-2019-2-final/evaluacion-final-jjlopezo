@@ -31,9 +31,6 @@ datos = LOAD 'data.csv' USING PigStorage(',')
         color:CHARARRAY,
         numero: int
         );
---
--- >>> Escriba su respuesta a partir de este punto <<<
---
 
 
 apellidos = FOREACH datos GENERATE apellido, SUBSTRING($2,0,1) as letra;

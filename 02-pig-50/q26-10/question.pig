@@ -17,22 +17,18 @@
 -- 
 fs -rm -f -r output;
 --
-u = LOAD 'data.csv' USING PigStorage(',') 
+data = LOAD 'data.csv' USING PigStorage(',') 
     AS (id:int, 
         firstname:CHARARRAY, 
         surname:CHARARRAY, 
         birthday:CHARARRAY, 
         color:CHARARRAY, 
         quantity:INT);
---
--- >>> Escriba su respuesta a partir de este punto <<<
---
 
-
-datos = FOREACH u GENERATE firstname, LOWER(SUBSTRING(firstname,0,1)) as letra;
+datos = FOREACH data GENERATE firstname, LOWER(SUBSTRING(firstname,0,1)) as letra;
 
 filtro = FILTER datos BY letra >= 'm';
 
-nom_filtro = FOREACH filtro GENERATE firstname;
+ffiltro = FOREACH filtro GENERATE firstname;
 
-store nom_filtro into 'output';
+store ffiltro into 'output';

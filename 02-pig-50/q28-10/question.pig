@@ -19,18 +19,15 @@
 -- 
 fs -rm -f -r output;
 --
-u = LOAD 'data.csv' USING PigStorage(',') 
+data = LOAD 'data.csv' USING PigStorage(',') 
     AS (id:int, 
         firstname:CHARARRAY, 
         surname:CHARARRAY, 
         birthday:CHARARRAY, 
         color:CHARARRAY, 
         quantity:INT);
---
--- >>> Escriba su respuesta a partir de este punto <<<
---
 
-datos = FOREACH u GENERATE birthday,SUBSTRING(birthday,0,4) AS anio_largo, SUBSTRING(birthday,2,4) AS anio_corto;
+datos = FOREACH data GENERATE birthday,SUBSTRING(birthday,0,4) AS anio_largo, SUBSTRING(birthday,2,4) AS anio_corto;
 
 filtro = FOREACH datos GENERATE anio_largo,anio_corto;
 
